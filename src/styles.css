@@ -1,89 +1,201 @@
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
 :root {
-  --bg: #0f1419;
-  --panel: #161d26;
-  --line: #26303c;
-  --text: #e8ecef;
-  --muted: #8a95a3;
-  --amber: #d4a24c;
-  --cyan: #5fb3b3;
-  --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
-  --serif: "Fraunces", Georgia, serif;
+  --bg:      #0b0f14;
+  --panel:   #111720;
+  --panel2:  #151d28;
+  --line:    #1e2b3a;
+  --line2:   #243447;
+  --text:    #e2e8f0;
+  --muted:   #6b7fa0;
+  --amber:   #e0a847;
+  --cyan:    #4fc3c3;
+  --violet:  #a78bfa;
+  --rose:    #f472b6;
+  --green:   #34d399;
+  --orange:  #fb923c;
+  --red:     #e07b6a;
+  --mono:    "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --serif:   "Fraunces", Georgia, serif;
+  --radius:  8px;
+  --shadow:  0 4px 24px rgba(0,0,0,0.45);
 }
-* {
-  box-sizing: border-box;
-}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
 body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font: 15px/1.55 var(--mono);
+  font: 14px/1.6 var(--mono);
+  min-height: 100vh;
 }
+
+/* ============================================================
+   HEADER
+   ============================================================ */
 header {
-  padding: 40px 32px 8px;
-  max-width: 1500px;
+  padding: 36px 32px 0;
+  max-width: 1600px;
   margin: auto;
 }
+
 h1 {
-  font: 700 clamp(2rem, 4.5vw, 3.4rem)/1.05 var(--serif);
-  margin: 0 0 8px;
+  font: 700 clamp(2rem, 4vw, 3.2rem)/1.05 var(--serif);
+  margin: 0 0 6px;
   letter-spacing: -0.02em;
+  background: linear-gradient(120deg, var(--cyan) 0%, var(--violet) 60%, var(--amber) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
+
 header p {
   color: var(--muted);
-  margin: 0;
+  margin: 0 0 0;
+  font-size: 0.88rem;
 }
+
+/* ============================================================
+   TAB NAVIGATION
+   ============================================================ */
+.tab-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 16px 32px 0;
+  max-width: 1600px;
+  margin: auto;
+  border-bottom: 1px solid var(--line);
+}
+
+.tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: var(--radius) var(--radius) 0 0;
+  color: var(--muted);
+  cursor: pointer;
+  font: 13px var(--mono);
+  transition: color 0.2s, background 0.2s, border-color 0.2s;
+  position: relative;
+  bottom: -1px;
+}
+
+.tab-btn:hover {
+  color: var(--text);
+  background: var(--panel);
+  border-color: var(--line);
+}
+
+.tab-active {
+  color: var(--cyan) !important;
+  background: var(--panel) !important;
+  border-color: var(--line) !important;
+  border-bottom-color: var(--panel) !important;
+}
+
+.tab-icon { font-size: 1rem; }
+.tab-label { font-size: 0.82rem; }
+
+/* ============================================================
+   MAIN LAYOUTS
+   ============================================================ */
 main {
+  padding: 24px 32px 56px;
+  max-width: 1600px;
+  margin: auto;
+}
+
+/* 3-column layout for Graph tab */
+.graph-layout {
   display: grid;
   gap: 20px;
-  padding: 24px 32px 56px;
-  max-width: 1500px;
-  margin: auto;
   grid-template-columns: 1fr;
 }
+
 @media (min-width: 1100px) {
-  main {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr) minmax(0, 1fr);
+  .graph-layout {
+    grid-template-columns: minmax(0,1fr) minmax(0,1.5fr) minmax(0,1fr);
   }
 }
+
+/* Single wide layout for feature tabs */
+.single-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 900px) {
+  .single-layout {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 960px;
+    margin: auto;
+  }
+}
+
+/* ============================================================
+   PANELS
+   ============================================================ */
 .panel {
   background: var(--panel);
   border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 20px;
+  border-radius: var(--radius);
+  padding: 22px;
   min-width: 0;
 }
+
+.feat-panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px;
+}
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
 h2 {
-  font: 500 1.35rem var(--serif);
+  font: 500 1.3rem var(--serif);
   margin: 0 0 6px;
   display: flex;
   align-items: center;
   gap: 10px;
 }
+
 h3 {
-  font: 500 1rem var(--serif);
-  margin: 22px 0 6px;
+  font: 500 0.95rem var(--serif);
+  margin: 20px 0 6px;
 }
-.num {
-  display: inline-grid;
-  place-items: center;
-  width: 26px;
-  height: 26px;
-  border: 1px solid var(--cyan);
-  color: var(--cyan);
-  border-radius: 50%;
-  font: 600 0.8rem var(--mono);
-}
+
 .hint {
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   margin: 0 0 12px;
+  line-height: 1.5;
 }
+
 .lbl {
   display: block;
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
   margin: 14px 0 4px;
 }
+
+/* ============================================================
+   FORM ELEMENTS
+   ============================================================ */
 textarea,
 select,
 button {
@@ -94,74 +206,476 @@ button {
   border-radius: 4px;
   padding: 8px;
 }
-textarea {
-  width: 100%;
-  resize: vertical;
+
+textarea { width: 100%; resize: vertical; }
+textarea.amber { color: var(--amber); word-break: break-all; }
+
+button { cursor: pointer; transition: border-color 0.2s, background 0.2s, color 0.2s; }
+button:hover { border-color: var(--cyan); }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-accent {
+  background: linear-gradient(135deg, #1a3a4a, #1a2a3a);
+  border: 1px solid var(--cyan);
+  color: var(--cyan);
+  padding: 8px 18px;
+  border-radius: 5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
 }
-textarea.amber {
-  color: var(--amber);
-  word-break: break-all;
+
+.btn-accent:hover:not(:disabled) {
+  background: rgba(79,195,195,0.12);
+  box-shadow: 0 0 16px rgba(79,195,195,0.2);
 }
-button {
-  cursor: pointer;
-}
-button:hover {
-  border-color: var(--cyan);
-}
-:focus-visible {
-  outline: 2px solid var(--cyan);
-  outline-offset: 2px;
-}
+
+:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+
 input[type="range"] {
   width: 100%;
   accent-color: var(--cyan);
 }
+
+/* ============================================================
+   ALGORITHM COMPARISON CARDS
+   ============================================================ */
+.algo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+}
+
+.algo-card {
+  background: var(--bg);
+  border: 1px solid var(--line2);
+  border-radius: 6px;
+  padding: 12px;
+  position: relative;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.algo-card:hover {
+  border-color: var(--line2);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+
+.algo-best {
+  border-color: var(--cyan) !important;
+  box-shadow: 0 0 16px rgba(79,195,195,0.15) !important;
+}
+
+.algo-name {
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: var(--text);
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 6px;
+}
+
+.algo-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 4px;
+  font-size: 0.78rem;
+  margin-bottom: 3px;
+}
+
+.algo-label { color: var(--muted); }
+.algo-value { font-weight: 600; }
+.algo-value.amber { color: var(--amber); }
+.algo-value.cyan  { color: var(--cyan); }
+.algo-value.muted { color: var(--muted); }
+.stat-val.green   { color: var(--green); }
+.stat-val.muted   { color: var(--muted); }
+
+/* ============================================================
+   STAT BOXES (metric display row)
+   ============================================================ */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 10px;
+}
+
+.stat-box {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-label {
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.stat-val {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.stat-val.amber { color: var(--amber); }
+.stat-val.cyan  { color: var(--cyan); }
+.stat-val.green { color: var(--green); }
+.stat-val.muted { color: var(--muted); }
+
+/* ============================================================
+   INFO BOX
+   ============================================================ */
+.info-box {
+  background: rgba(79,195,195,0.05);
+  border: 1px solid rgba(79,195,195,0.2);
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   SAMPLE / PRESET BUTTONS
+   ============================================================ */
+.sample-btn {
+  background: var(--bg);
+  border: 1px solid var(--line2);
+  border-radius: 4px;
+  color: var(--muted);
+  padding: 5px 12px;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.sample-btn:hover {
+  border-color: var(--cyan);
+  color: var(--text);
+}
+
+.algo-badge {
+  margin-top: 8px;
+  font-size: 0.72rem;
+  color: var(--cyan);
+  font-weight: 600;
+  text-align: center;
+  background: rgba(79,195,195,0.08);
+  border-radius: 3px;
+  padding: 2px 6px;
+}
+
+/* ============================================================
+   SUB-SECTIONS (within feat panels)
+   ============================================================ */
+.sub-section { padding: 4px 0; }
+
+.sub-heading {
+  font: 600 0.9rem var(--mono);
+  color: var(--text);
+  margin: 0 0 4px;
+}
+
+.sub-divider {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 20px 0;
+}
+
+/* ============================================================
+   SUB-TABS
+   ============================================================ */
+.sub-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--line);
+}
+
+.sub-tab {
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+  color: var(--muted);
+  padding: 5px 14px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  position: relative;
+  bottom: -1px;
+  transition: color 0.2s, background 0.2s;
+}
+
+.sub-tab:hover { color: var(--text); background: var(--bg); }
+.sub-tab.active {
+  color: var(--amber);
+  background: var(--bg);
+  border-color: var(--line);
+  border-bottom-color: var(--panel);
+}
+
+/* ============================================================
+   COMPRESSION RATIO BARS (already inline but ensure mark)
+   ============================================================ */
+mark {
+  background: rgba(224,168,71,0.3);
+  color: var(--amber);
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+/* ============================================================
+   KMP FAILURE TABLE
+   ============================================================ */
+.fail-table {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.fail-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 4px 8px;
+  min-width: 32px;
+}
+
+.fail-char { color: var(--cyan); font-weight: 600; }
+.fail-val  { color: var(--amber); font-size: 0.78rem; }
+
+/* ============================================================
+   GENETIC ALGORITHM UI
+   ============================================================ */
+.ga-winner {
+  margin-top: 16px;
+  padding: 16px;
+  background: linear-gradient(135deg, rgba(167,139,250,0.06), rgba(79,195,195,0.06));
+  border: 1px solid rgba(167,139,250,0.3);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.ga-winner-label {
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+
+.ga-winner-combo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ga-algo-tag {
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.ga-algo-tag.pattern {
+  background: rgba(79,195,195,0.12);
+  border: 1px solid var(--cyan);
+  color: var(--cyan);
+}
+
+.ga-algo-tag.compr {
+  background: rgba(167,139,250,0.12);
+  border: 1px solid var(--violet);
+  color: var(--violet);
+}
+
+.ga-plus { color: var(--muted); font-size: 1.2rem; }
+
+.ga-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.ga-spinner {
+  width: 16px; height: 16px;
+  border: 2px solid var(--line);
+  border-top-color: var(--cyan);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ============================================================
+   FITNESS CHART
+   ============================================================ */
+.fitness-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 80px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 8px 8px 20px;
+  overflow: hidden;
+}
+
+.fitness-bar-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  position: relative;
+}
+
+.fitness-bar {
+  width: 100%;
+  background: linear-gradient(to top, var(--violet), var(--cyan));
+  border-radius: 2px 2px 0 0;
+  min-height: 2px;
+  transition: height 0.3s;
+}
+
+.fitness-label {
+  position: absolute;
+  bottom: -16px;
+  font-size: 0.65rem;
+  color: var(--muted);
+}
+
+/* ============================================================
+   CATEGORY FILTER (Performance Panel)
+   ============================================================ */
+.cat-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.cat-btn {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  color: var(--muted);
+  padding: 3px 12px;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cat-btn:hover { color: var(--text); border-color: var(--line2); }
+.cat-btn-active { color: var(--text) !important; background: var(--panel2) !important; }
+
+.cat-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   COMPLEXITY TABLE
+   ============================================================ */
+.complexity-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.82rem;
+}
+
+.complexity-table th,
+.complexity-table td {
+  padding: 7px 10px;
+  text-align: left;
+  border: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.complexity-table th {
+  color: var(--muted);
+  font-weight: 500;
+  background: var(--bg);
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.complexity-table tbody tr:hover { background: rgba(255,255,255,0.02); }
+
+/* ============================================================
+   STREAM / PRE
+   ============================================================ */
 .stream {
-  margin: 12px 0 0;
+  margin: 8px 0 0;
   white-space: pre-wrap;
   word-break: break-all;
-  min-height: 150px;
+  min-height: 60px;
   max-height: 260px;
   overflow: auto;
   background: var(--bg);
   padding: 12px;
   border-radius: 4px;
+  border: 1px solid var(--line);
+  font-size: 0.83rem;
 }
-.plain {
-  color: var(--cyan);
-}
-.amber {
-  color: var(--amber);
-}
+
+.plain { color: var(--cyan); }
+.amber { color: var(--amber); }
+
+/* ============================================================
+   KEYGRID (cipher key display)
+   ============================================================ */
 .keygrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(38px, 1fr));
   gap: 4px;
   margin-top: 10px;
   text-align: center;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
 }
+
 .keygrid div {
   border: 1px solid var(--line);
   border-radius: 3px;
-  padding: 2px 0;
+  padding: 3px 0;
+  background: var(--bg);
 }
-.keygrid b {
-  display: block;
-  color: var(--cyan);
-  font-weight: 600;
-}
-.keygrid i {
-  display: block;
-  color: var(--amber);
-  font-style: normal;
-}
+
+.keygrid b { display: block; color: var(--cyan); font-weight: 600; }
+.keygrid i { display: block; color: var(--amber); font-style: normal; }
+
+/* ============================================================
+   MISC SHARED
+   ============================================================ */
 summary {
   cursor: pointer;
   color: var(--muted);
   margin-top: 14px;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
+  user-select: none;
 }
+
+summary:hover { color: var(--text); }
+
 .row {
   display: flex;
   flex-wrap: wrap;
@@ -171,131 +685,103 @@ summary {
   color: var(--muted);
   font-size: 0.85rem;
 }
+
 .row label {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
-.graph {
-  width: 100%;
-  height: auto;
-  background: var(--bg);
-  border-radius: 4px;
+
+.num {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--cyan);
+  color: var(--cyan);
+  border-radius: 50%;
+  font: 600 0.8rem var(--mono);
+  flex-shrink: 0;
 }
-.edge {
-  stroke: #3a4757;
-  stroke-width: 2;
-}
-.edge.on {
-  stroke: var(--cyan);
-  stroke-width: 4;
-}
-.w {
-  fill: var(--amber);
-  font-size: 13px;
-}
-.node {
-  fill: var(--panel);
-  stroke: #5a6878;
-  stroke-width: 2;
-}
-.node.seen {
-  fill: #1e2c34;
-  stroke: var(--cyan);
-}
-.node.path {
-  fill: var(--cyan);
-  stroke: var(--cyan);
-}
-.node.cur {
-  stroke: var(--amber);
-  stroke-width: 4;
-}
-.nl {
-  fill: var(--text);
-  font-weight: 600;
-  font-size: 16px;
-  pointer-events: none;
-}
-.node.path + .nl {
-  fill: var(--bg);
-}
-.hv {
-  fill: var(--muted);
-  font-size: 11px;
-}
-.tag {
-  fill: var(--cyan);
-  font-size: 11px;
-  font-weight: 600;
-}
+
+.err { color: var(--red); }
+
 .step {
   background: var(--bg);
   padding: 10px 12px;
   border-radius: 4px;
   margin: 6px 0;
+  border: 1px solid var(--line);
 }
-.step span {
-  color: var(--muted);
-}
+
+.step span { color: var(--muted); }
+
 .queue {
   color: var(--amber);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   margin-top: 4px;
   word-break: break-word;
 }
+
 .result {
-  min-height: 84px;
+  min-height: 80px;
   margin-top: 12px;
   padding: 12px;
   border: 1px dashed var(--line);
   border-radius: 4px;
   color: var(--muted);
 }
-.result.show {
-  border: 1px solid var(--cyan);
-  color: var(--text);
-}
-.result b {
-  color: var(--cyan);
-}
-.mono {
-  margin: 0;
-  color: var(--text);
-  font-size: 0.85rem;
-  overflow: auto;
-}
-.scroll {
-  overflow-x: auto;
-}
-table {
-  border-collapse: collapse;
-  font-size: 0.85rem;
-}
-th,
-td {
+
+.result.show  { border: 1px solid var(--cyan); color: var(--text); }
+.result b { color: var(--cyan); }
+
+.mono { margin: 0; color: var(--text); font-size: 0.83rem; overflow: auto; }
+
+.scroll { overflow-x: auto; }
+
+/* Standard table (adjacency etc.) */
+table { border-collapse: collapse; font-size: 0.82rem; }
+
+th, td {
   padding: 4px 9px;
   text-align: right;
   border: 1px solid var(--line);
 }
-th {
-  color: var(--muted);
-  font-weight: 400;
-}
-td {
-  color: #4a5565;
-}
-td.nz {
-  color: var(--amber);
-}
-.err {
-  color: #e07b6a;
-}
+
+th { color: var(--muted); font-weight: 400; }
+td { color: #4a5565; }
+td.nz { color: var(--amber); }
+
+/* ============================================================
+   SVG GRAPH STYLES
+   ============================================================ */
+.graph { width: 100%; height: auto; background: var(--bg); border-radius: 4px; }
+.edge { stroke: #2a3747; stroke-width: 2; }
+.edge.on { stroke: var(--cyan); stroke-width: 4; }
+.w { fill: var(--amber); font-size: 13px; }
+.node { fill: var(--panel); stroke: #4a5a70; stroke-width: 2; }
+.node.seen { fill: #1a2d3a; stroke: var(--cyan); }
+.node.path { fill: var(--cyan); stroke: var(--cyan); }
+.node.cur { stroke: var(--amber); stroke-width: 4; }
+.nl { fill: var(--text); font-weight: 600; font-size: 16px; pointer-events: none; }
+.node.path + .nl { fill: var(--bg); }
+.hv { fill: var(--muted); font-size: 11px; }
+.tag { fill: var(--cyan); font-size: 11px; font-weight: 600; }
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
 @media (prefers-reduced-motion: no-preference) {
-  .node,
-  .edge {
-    transition:
-      fill 0.25s,
-      stroke 0.25s;
-  }
+  .node, .edge { transition: fill 0.25s, stroke 0.25s; }
+  .algo-card   { transition: border-color 0.25s, box-shadow 0.25s; }
+  .tab-btn     { transition: color 0.2s, background 0.2s; }
+  .btn-accent  { transition: background 0.2s, box-shadow 0.2s; }
 }
+
+/* ============================================================
+   SCROLLBAR STYLING
+   ============================================================ */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--line2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }

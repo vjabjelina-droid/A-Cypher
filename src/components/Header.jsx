@@ -1,9 +1,9 @@
 export default function Header() {
   return (
     <header>
-      <h1>A* on an Encrypted Graph</h1>
+      <h1>A-Cypher</h1>
       <p>
-        Logic midterm project. Decrypt the file, build the graph, search it.
+        Encrypted graph search · Pattern matching · Text compression · Genetic optimization · Parallel algorithms
       </p>
     </header>
   );
